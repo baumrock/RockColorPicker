@@ -1,0 +1,1 @@
+<input type="text" id="<?= $f->id ?>" class="uk-input" name="<?= $f->name ?>">
