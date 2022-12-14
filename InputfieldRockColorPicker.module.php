@@ -24,6 +24,16 @@ class InputfieldRockColorPicker extends Inputfield
   }
 
   /**
+   * Construct
+   *
+   */
+  public function __construct()
+  {
+    parent::__construct();
+    $this->setAttribute('colors', '');
+  }
+
+  /**
    * Get Inputfields needed to configure this Fieldtype
    *
    * @param Field $field
@@ -33,6 +43,12 @@ class InputfieldRockColorPicker extends Inputfield
   {
     /** @var InputfieldWrapper $inputfields */
     $inputfields = $this->wire(new InputfieldWrapper());
+
+    $inputfields->add([
+      'type' => 'textarea',
+      'name' => 'colors',
+      'value' => $this->colors,
+    ]);
 
     return $inputfields;
   }
