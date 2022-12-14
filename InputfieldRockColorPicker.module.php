@@ -54,16 +54,6 @@ class InputfieldRockColorPicker extends Inputfield
   }
 
   /**
-   * Process the Inputfield's input
-   * @return $this
-   */
-  public function ___processInput($input)
-  {
-    $this->message('process input!');
-    return false;
-  }
-
-  /**
    * Render the Inputfield
    * @return string
    */
