@@ -14,43 +14,23 @@ class InputfieldRockColorPicker extends Inputfield
   {
     return [
       'title' => 'RockColorPicker Inputfield',
-      'version' => '0.0.1',
+      'version' => '1.0.0',
       'summary' => 'Module to choose a color from a palette',
       'icon' => 'paint-brush',
       'requires' => [
-        'FieldtypeRockColorPicker',
+        'RockColorPicker',
       ],
     ];
   }
 
-  /**
-   * Construct
-   *
-   */
-  public function __construct()
+  public function colors()
   {
-    parent::__construct();
-    $this->setAttribute('colors', '');
+    return $this->master()->colors()->get($this->name);
   }
 
-  /**
-   * Get Inputfields needed to configure this Fieldtype
-   *
-   * @param Field $field
-   * @return InputfieldWrapper
-   */
-  public function ___getConfigInputfields()
+  public function master(): RockColorPicker
   {
-    /** @var InputfieldWrapper $inputfields */
-    $inputfields = $this->wire(new InputfieldWrapper());
-
-    $inputfields->add([
-      'type' => 'textarea',
-      'name' => 'colors',
-      'value' => $this->colors,
-    ]);
-
-    return $inputfields;
+    return $this->wire->modules->get('RockColorPicker');
   }
 
   /**
@@ -59,8 +39,12 @@ class InputfieldRockColorPicker extends Inputfield
    */
   public function ___render()
   {
-    return $this->wire->files->render(__DIR__ . "/Inputfield.php", [
-      'f' => $this,
-    ]);
+    $this->master()->loadAssets();
+    $val = $this->value;
+    if ($val instanceof WireData) $val = $val->name;
+    return $this->wire->files->render(
+      __DIR__ . "/InputfieldMarkup.php",
+      ['f' => $this, 'value' => $val]
+    );
   }
 }

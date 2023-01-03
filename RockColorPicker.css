@@ -1,0 +1,21 @@
+.rcp-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.InputfieldRockColorPicker input {
+  display: none;
+}
+svg.rcp-color {
+  width: 40px;
+  height: 40px;
+  outline: 1px solid #afafaf;
+  cursor: pointer;
+}
+svg.rcp-color.selected {
+  outline: 5px solid #afafaf;
+}
+svg.rcp-color rect {
+  width: 100%;
+  height: 100%;
+}

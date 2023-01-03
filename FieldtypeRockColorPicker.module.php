@@ -14,30 +14,35 @@ class FieldtypeRockColorPicker extends FieldtypeText
   {
     return [
       'title' => 'RockColorPicker',
-      'version' => '0.0.1',
+      'version' => '1.0.0',
       'summary' => 'Module to choose a color from a palette',
       'icon' => 'paint-brush',
       'requires' => [
-        'PHP>=8.1',
-      ],
-      'installs' => [
-        'InputfieldRockColorPicker',
+        'RockColorPicker',
       ],
     ];
   }
 
   /**
-   * Return the fields required to configure an instance of FieldtypeText
+   * Format value for output
    *
+   * @param Page $page
    * @param Field $field
-   * @return InputfieldWrapper
+   * @param string $value
+   * @return string
    *
    */
-  public function ___getConfigInputfields(Field $field)
+  public function ___formatValue(Page $page, Field $field, $value)
   {
-    /** @var InputfieldWrapper $inputfields */
-    $inputfields = $this->wire(new InputfieldWrapper());
-    return $inputfields;
+    if (!$value instanceof WireData) return false;
+    return $value->name;
+  }
+
+  public function ___wakeupValue(Page $page, Field $field, $value)
+  {
+    $colors = $this->master()->colors()->get($field->name);
+    if ($colors instanceof WireArray) return $colors->get($value);
+    return new WireData();
   }
 
   /**
@@ -51,5 +56,10 @@ class FieldtypeRockColorPicker extends FieldtypeText
   public function getInputfield(Page $page, Field $field)
   {
     return $this->wire->modules->get('InputfieldRockColorPicker');
+  }
+
+  public function master(): RockColorPicker
+  {
+    return $this->wire->modules->get('RockColorPicker');
   }
 }
