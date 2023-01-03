@@ -14,7 +14,7 @@ class InputfieldRockColorPicker extends Inputfield
   {
     return [
       'title' => 'RockColorPicker Inputfield',
-      'version' => '1.0.0',
+      'version' => '1.0.1',
       'summary' => 'Module to choose a color from a palette',
       'icon' => 'paint-brush',
       'requires' => [
@@ -25,7 +25,9 @@ class InputfieldRockColorPicker extends Inputfield
 
   public function colors()
   {
-    return $this->master()->colors()->get($this->name);
+    $name = $this->name;
+    if ($i = strpos($name, "_repeater")) $name = substr($name, 0, $i);
+    return $this->master()->colors()->get($name);
   }
 
   public function master(): RockColorPicker
@@ -39,12 +41,16 @@ class InputfieldRockColorPicker extends Inputfield
    */
   public function ___render()
   {
-    $this->master()->loadAssets();
     $val = $this->value;
     if ($val instanceof WireData) $val = $val->name;
     return $this->wire->files->render(
       __DIR__ . "/InputfieldMarkup.php",
       ['f' => $this, 'value' => $val]
     );
+  }
+
+  public function renderReady(Inputfield $parent = null, $renderValueMode = false)
+  {
+    $this->master()->loadAssets();
   }
 }

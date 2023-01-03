@@ -17,6 +17,7 @@ $(document).on("click", ".InputfieldRockColorPicker svg", function () {
     util.addClass(el, "selected");
     util.attr(input, "value", util.data(el, "col"));
   }
+  $(input).change(); // trigger change event (important for rockpagebuilder)
 });
 $(document).bind("keypress", function (e) {
   // support space+enter to change color
