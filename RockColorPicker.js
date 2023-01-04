@@ -1,27 +1,33 @@
-$(document).on("click", ".InputfieldRockColorPicker svg", function () {
-  // using UIkit JS because jquery fails with addclass on svg
-  // see https://stackoverflow.com/a/10257755/6370411
-  let util = UIkit.util;
-  let el = util.$(this);
-  let parent = el.parentNode;
-  let $li = $(this).closest(".Inputfield");
-  let input = util.$("input", parent);
-  let remove = util.hasClass(el, "selected");
-  util.each(util.$$("svg", parent), function (el) {
-    util.removeClass(el, "selected");
+$(document).on("click", ".InputfieldRockColorPicker .rcp-color", function () {
+  let $color = $(this).closest(".rcp-color");
+  let $colors = $color.closest(".rcp-colors");
+  let $li = $color.closest(".Inputfield");
+  let $input = $li.find("input");
+
+  // set flag that defines wether we can remove selected state or not
+  let remove =
+    $color.hasClass("selected") && !$li.hasClass("InputfieldStateRequired");
+
+  // unselect all items
+  $.each($colors.find(".rcp-color"), function (i, el) {
+    $(el).removeClass("selected");
   });
-  $(this).closest(".Inputfield").addClass("InputfieldStateChanged");
-  if (remove && !$li.hasClass("InputfieldStateRequired")) {
-    util.attr(input, "value", "");
+
+  // set the new selected item
+  if (remove) {
+    $input.val("");
   } else {
-    util.addClass(el, "selected");
-    util.attr(input, "value", util.data(el, "col"));
+    $color.addClass("selected");
+    $input.val($color.data("color"));
   }
-  $(input).change(); // trigger change event (important for rockpagebuilder)
+
+  // trigger change on the inputfield
+  $li.addClass("InputfieldStateChanged");
+  $input.change(); // for rockpagebuilder
 });
 $(document).bind("keypress", function (e) {
   // support space+enter to change color
   if (e.which == 32 || e.which == 13) {
-    $(":focus").closest("svg.rcp-color").click();
+    $(":focus").closest(".rcp-color").click();
   }
 });

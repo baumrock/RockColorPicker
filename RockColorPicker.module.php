@@ -18,7 +18,7 @@ class RockColorPicker extends WireData implements Module
   {
     return [
       'title' => 'RockColorPicker',
-      'version' => '1.0.0',
+      'version' => '1.1.0',
       'summary' => 'Main RockColorPicker Module',
       'autoload' => false,
       'singular' => true, // sic
@@ -74,9 +74,6 @@ class RockColorPicker extends WireData implements Module
       $item->name = $name;
       $item->css = $data[0];
       $item->label = count($data) > 1 ? $data[1] : '';
-      $item->tooltip = $item->label
-        . ($item->label ? " - " : "")
-        . $item->css;
       $arr->set($name, $item);
     }
     $this->colors->set($field, $arr);

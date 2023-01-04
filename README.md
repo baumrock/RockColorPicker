@@ -1,8 +1,8 @@
 # RockColorPicker
 
-Super simple color picker for ProcessWire:
+Super simple color (and custom HTML) picker for ProcessWire:
 
-<img src=https://i.imgur.com/VYv3Mbz.png height=150>
+<img src=https://i.imgur.com/701Jj9C.png height=150>
 
 On non-required fields the selected color can be unselected by clicking the color again. The module also supports selecting colors via keyboard input (tab to focus color and then space/enter to select/unselect).
 
@@ -30,6 +30,22 @@ $wire->addHookBefore(
       'green' => ['#00ff00', 'This is green'],
       'blue' => ['#0000ff', 'This is blue'],
     ]);
+
+    // custom CSS + HTML example
+    $event->object->setColors('site_bgcolor', [
+      // custom css
+      'custom' => [
+        'background: rgb(34,0,255); background: linear-gradient(90deg, rgba(34,0,255,1) 0%, rgba(0,0,0,1) 100%);',
+        'Blue to black gradient'
+      ],
+      // custom html
+      'custom2' => [
+        '<div style="width:200px;">
+          custom html demo 😍
+        </div>',
+        'Custom HTML demo :)'
+      ],
+    ]);
   }
 );
 ```
@@ -38,11 +54,11 @@ $wire->addHookBefore(
 
 Formatted value:
 
-<img src=https://i.imgur.com/sOBc18h.png width=280>
+<img src=https://imgur.com/E07skYE.png height=130>
 
 Unformatted value:
 
-<img src=https://i.imgur.com/StnDbWm.png width=400>
+<img src=https://i.imgur.com/whrWc67.png height=280>
 
 ## Why is there no GUI for setup?
 
