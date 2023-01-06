@@ -18,7 +18,7 @@ class RockColorPicker extends WireData implements Module
   {
     return [
       'title' => 'RockColorPicker',
-      'version' => '1.1.0',
+      'version' => '1.2.0',
       'summary' => 'Main RockColorPicker Module',
       'autoload' => false,
       'singular' => true, // sic
@@ -47,6 +47,20 @@ class RockColorPicker extends WireData implements Module
     return $this->colors;
   }
 
+  /**
+   * Return style string from css setting
+   * If provided a color like #ff0000 or rgba(0,0,0) we prepend the
+   * background-color property. Otherwise we use it as is.
+   * css = #afafaf --> style = background-color:#afafaf;
+   * css = 'foo:bar' --> style = 'foo:bar'
+   */
+  public function getStyle($item): string
+  {
+    $style = $item->css;
+    if (!strpos($style, ":")) $style = "background-color:$style";
+    return $style;
+  }
+
   public function loadAssets()
   {
     if ($this->assetsAdded) return;
@@ -73,6 +87,7 @@ class RockColorPicker extends WireData implements Module
       $item = $this->wire(new WireData());
       $item->name = $name;
       $item->css = $data[0];
+      $item->style = $this->getStyle($item);
       $item->label = count($data) > 1 ? $data[1] : '';
       $arr->set($name, $item);
     }
