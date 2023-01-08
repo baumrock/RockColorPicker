@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/baumrock/RockColorPicker/compare/v1.2.0...v1.2.1) (2023-01-08)
+
+
+### Bug Fixes
+
+* improve setup and error handling ([c6426c6](https://github.com/baumrock/RockColorPicker/commit/c6426c6902a4cef2e6be956de67a63badba5e611))
+
+
+
 # [1.2.0](https://github.com/baumrock/RockColorPicker/compare/v1.1.0...v1.2.0) (2023-01-06)
 
 
