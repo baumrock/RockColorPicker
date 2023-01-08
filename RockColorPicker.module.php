@@ -18,7 +18,7 @@ class RockColorPicker extends WireData implements Module
   {
     return [
       'title' => 'RockColorPicker',
-      'version' => '1.2.0',
+      'version' => '1.2.1',
       'summary' => 'Main RockColorPicker Module',
       'autoload' => false,
       'singular' => true, // sic

@@ -15,6 +15,9 @@
       title='{$col->label}' uk-tooltip
       >$html</div>";
   }
+  if (!$f->colors()->count()) {
+    echo "setup your field in init.php";
+  }
   ?>
   <input type="text" id="<?= $f->id ?>" class="uk-input" name="<?= $f->name ?>" value="<?= $value ?>">
 </div>

@@ -27,7 +27,9 @@ class InputfieldRockColorPicker extends Inputfield
   {
     $name = $this->name;
     if ($i = strpos($name, "_repeater")) $name = substr($name, 0, $i);
-    return $this->master()->colors()->get($name);
+    $colors = $this->master()->colors()->get($name);
+    if (!$colors instanceof WireArray) return new WireArray();
+    return $colors;
   }
 
   public function master(): RockColorPicker
@@ -45,7 +47,7 @@ class InputfieldRockColorPicker extends Inputfield
     if ($val instanceof WireData) $val = $val->name;
     return $this->wire->files->render(
       __DIR__ . "/InputfieldMarkup.php",
-      ['f' => $this, 'value' => $val]
+      ['f' => $this, 'value' => $val ?: false]
     );
   }
 
