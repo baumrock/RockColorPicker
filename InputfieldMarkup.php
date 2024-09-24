@@ -1,5 +1,8 @@
 <div class="rcp-colors">
   <?php
+
+  use function ProcessWire\wire;
+
   foreach ($f->colors() as $col) {
     $selected = ($value == $col->name) ? "selected" : "";
     if (strpos($col->css, "<") === 0) {
@@ -16,7 +19,9 @@
       >$html</div>";
   }
   if (!$f->colors()->count()) {
-    echo "setup your field in init.php";
+    echo wire()->files->render(__DIR__ . '/InputfieldMarkupSetup.php', [
+      'field' => $f,
+    ]);
   }
   ?>
   <input type="text" id="<?= $f->id ?>" class="uk-input" name="<?= $f->name ?>" value="<?= $value ?>">
