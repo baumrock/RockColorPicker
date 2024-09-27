@@ -1,10 +1,17 @@
 <div class="rcp-colors">
   <?php
+
+  use function ProcessWire\wire;
+
   foreach ($f->colors() as $col) {
+    // get selected state
     $selected = ($value == $col->name) ? "selected" : "";
-    if (strpos($col->css, "<") === 0) {
-      $html = $col->css;
-    } else {
+
+    // create html from the colors css property
+    // if it starts with < it is html
+    // otherwise we use the css property and put it in the style attribute
+    $html = $col->css;
+    if (!str_starts_with($col->css, "<")) {
       $html = "<div style='{$col->style}'></div>";
     }
 
@@ -16,7 +23,9 @@
       >$html</div>";
   }
   if (!$f->colors()->count()) {
-    echo "setup your field in init.php";
+    echo wire()->files->render(__DIR__ . '/InputfieldMarkupSetup.php', [
+      'field' => $f,
+    ]);
   }
   ?>
   <input type="text" id="<?= $f->id ?>" class="uk-input" name="<?= $f->name ?>" value="<?= $value ?>">

@@ -14,25 +14,6 @@ class RockColorPicker extends WireData implements Module
   /** @var WireData */
   private $colors;
 
-  public static function getModuleInfo()
-  {
-    return [
-      'title' => 'RockColorPicker',
-      'version' => '1.2.1',
-      'summary' => 'Main RockColorPicker Module',
-      'autoload' => false,
-      'singular' => true, // sic
-      'icon' => 'paint-brush',
-      'requires' => [
-        'PHP>=8.1',
-      ],
-      'installs' => [
-        'InputfieldRockColorPicker',
-        'FieldtypeRockColorPicker',
-      ],
-    ];
-  }
-
   public function init()
   {
     $this->colors = $this->wire(new WireData());
