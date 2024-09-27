@@ -14,7 +14,7 @@ class InputfieldRockColorPicker extends Inputfield
   {
     return [
       'title' => 'RockColorPicker Inputfield',
-      'version' => '1.0.1',
+      'version' => json_decode(file_get_contents(__DIR__ . "/package.json"))->version,
       'summary' => 'Module to choose a color from a palette',
       'icon' => 'paint-brush',
       'requires' => [

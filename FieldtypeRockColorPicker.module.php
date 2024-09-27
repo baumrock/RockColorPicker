@@ -14,7 +14,7 @@ class FieldtypeRockColorPicker extends FieldtypeText
   {
     return [
       'title' => 'RockColorPicker',
-      'version' => '1.0.0',
+      'version' => json_decode(file_get_contents(__DIR__ . "/package.json"))->version,
       'summary' => 'Module to choose a color from a palette',
       'icon' => 'paint-brush',
       'requires' => [
@@ -26,16 +26,17 @@ class FieldtypeRockColorPicker extends FieldtypeText
   /**
    * Format value for output
    *
-   * @param Page $page
-   * @param Field $field
-   * @param string $value
-   * @return string
-   *
+   * @param mixed $value
    */
-  public function ___formatValue(Page $page, Field $field, $value)
+  public function ___formatValue(Page $page, Field $field, $value): string|false
   {
-    if (!$value instanceof WireData) return false;
+    if (!$value->name) return false;
     return $value->name;
+  }
+
+  public function getBlankValue(Page $page, Field $field)
+  {
+    return new WireData();
   }
 
   public function ___wakeupValue(Page $page, Field $field, $value)
