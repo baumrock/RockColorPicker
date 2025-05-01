@@ -30,6 +30,7 @@ class FieldtypeRockColorPicker extends FieldtypeText
    */
   public function ___formatValue(Page $page, Field $field, $value): string|false
   {
+    if (is_string($value)) return $value;
     if (!$value->name) return false;
     return $value->name;
   }
