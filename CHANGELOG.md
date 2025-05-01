@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/baumrock/RockColorPicker/compare/v1.3.0...v1.3.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* check if value is already a string (when already in memory) ([cbf78af](https://github.com/baumrock/RockColorPicker/commit/cbf78af88ab6bfe5cfd65f39f413bc60a8344b96))
+
 ## [1.3.0](https://github.com/baumrock/RockColorPicker/compare/v1.2.1...v1.3.0) (2024-09-27)
 
 
